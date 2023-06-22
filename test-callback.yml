@@ -1,0 +1,14 @@
+- name: test
+  hosts: localhost
+  check_mode: true
+
+  vars:
+    test: ici
+
+  tasks:
+    - name: test1
+      ansible.builtin.debug:
+        var: groups
+    - name: test2
+      ansible.builtin.debug:
+        var: test
