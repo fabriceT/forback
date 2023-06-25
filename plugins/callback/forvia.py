@@ -37,7 +37,7 @@ class CallbackModule(CallbackBase):
         try:
             path = self.playbook_hosts[result._host.get_name()]
             with open(path, 'ab+') as fd:
-                fd.write(to_bytes("************ %s *********\n" % result._task.get_name()))
+                fd.write(to_bytes("\n************ %s *********\n" % result._task.get_name()))
                 fd.write(buf)
 
             display.display("**** " + path + " *****")
