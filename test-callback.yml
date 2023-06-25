@@ -1,10 +1,11 @@
 - name: Test
   hosts: all
-  check_mode: true
   gather_facts: false
+  strategy: ansible.builtin.linear
 
   vars:
     test: ici
+    pwd: "{{ lookup('env','PWD') }}"
 
   tasks:
     - name: Test1
@@ -12,11 +13,14 @@
         var: groups
 
     - name: Test2
-      ansible.builtin.debug:
-        var: test
+      ansible.builtin.lineinfile:
+        path: "{{ pwd }}/test.txt"
+        line: "{{ ansible_play_hosts }}: {{ ansible_play_hosts | join | shuffle | join }}"
+        create: true
+        mode: "0644"
 
     - name: Test3
       ansible.builtin.debug:
-        msg: "{{ test }}"
+        msg: "{{ pwd }}"
       delegate_to: localhost
       run_once: true
