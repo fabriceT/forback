@@ -1,0 +1,3 @@
+[all]
+localhost ansible_connection=local
+sap ansible_host=127.0.0.1 ansible_connection=local

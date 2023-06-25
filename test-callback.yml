@@ -1,14 +1,22 @@
-- name: test
-  hosts: localhost
+- name: Test
+  hosts: all
   check_mode: true
+  gather_facts: false
 
   vars:
     test: ici
 
   tasks:
-    - name: test1
+    - name: Test1
       ansible.builtin.debug:
         var: groups
-    - name: test2
+
+    - name: Test2
       ansible.builtin.debug:
         var: test
+
+    - name: Test3
+      ansible.builtin.debug:
+        msg: "{{ test }}"
+      delegate_to: localhost
+      run_once: true
